@@ -14,37 +14,22 @@
 // specific language governing permissions and limitations
 // under the License.
 
-# Represents an event which will trigger when there is a changes to listining direcotry.
+import ballerina/time;
+
+# Metadata record contains metadata information of a file.
+# This record is returned by getMetaData function.
 #
-# + name - Absolute file URI for triggerd event
-# + operation - Triggered event action. This can be create, delete or modify
-public type FileEvent record {|
-    string name;
-    string operation;
+# + absPath - Absolute path of the file
+# + size - Size of the file (in bytes)
+# + modifiedTime - The last modified time of the file
+# + dir - Whether the file is a directory or not
+# + readable - Whether the file is readable or not
+# + writable - Whether the file is writable or not
+public type MetaData record{|
+    string absPath;
+    int size;
+    time:Time modifiedTime;
+    boolean dir;
+    boolean readable;
+    boolean writable;
 |};
-
-
-public enum NormOption {
-    CLEAN,
-    SYMLINK,
-    NORMCASE
-}
-
-public enum DirOption {
-    RECURSIVE,
-    NON_RECURSIVE
-}
-
-public enum TestOption {
-    EXISTS,
-    IS_DIR,
-    IS_SYMLINK,
-    READABLE,
-    WRITABLE
-}
-
-public enum CopyOption {
-    REPLACE_EXISTING,
-    COPY_ATTRIBUTES,
-    NO_FOLLOW_LINKS
-}
